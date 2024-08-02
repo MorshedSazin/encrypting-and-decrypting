@@ -1,5 +1,8 @@
 /*it just for fun*/
-#include<bits/stdc++.h>
+#include <iostream>
+#include <ctime>
+#include <algorithm> 
+#include <string>
 using namespace std;
 
 
@@ -67,3 +70,7 @@ int main() {
 
     return 0;
 }
+#include <iostream>
+#include <ctime>
+#include <algorithm> 
+#include <string> 
