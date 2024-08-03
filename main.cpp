@@ -12,31 +12,33 @@ int currentTime() {
     return date.tm_hour;
 }
 
-void decrypting(string toBeDicy) {    
-    string s1, s2;
-    cout << "\nThe message was: ";
-    int hashCode = currentTime();
-    for (int i = 0; i < toBeDicy.size(); ++i) {
-        (i%2==0) ? (toBeDicy[i] != ' ' ? s1+= (toBeDicy[i]-hashCode) : s1+=' ') 
-        : (toBeDicy[i] != ' ' ? (s2+=toBeDicy[i]+hashCode)   : s2+=' ');
-    }
-    reverse(s2.begin(),s2.end());
-    cout << s1 << s2 << endl;
-    cout << "\033[0m\n\n";
-}
-
 void encrypting(string toBeEncrypt, int hashCode = currentTime()) {
     printf("\nThe encrypted message is: ");
-    for (int i = 0, j = toBeEncrypt.size() - 1; i <= j; ++i, --j) {
-
-        toBeEncrypt[i] = (toBeEncrypt[i] == ' ') ? ' ' : (toBeEncrypt[i] + hashCode);
-        toBeEncrypt[j] = (toBeEncrypt[j] == ' ') ? ' ' : (toBeEncrypt[j] - hashCode);
+    for (int i = 0, j = toBeEncrypt.length() - 1; i <= j; ++i, --j) {
+        if(i!=j){
+            toBeEncrypt[i] = (toBeEncrypt[i] == ' ') ? '~' : (toBeEncrypt[i] + hashCode);
+            toBeEncrypt[j] = (toBeEncrypt[j] == ' ') ? '~' : (toBeEncrypt[j] - hashCode);
+        }else toBeEncrypt[i] = (toBeEncrypt[i] == ' ') ? '~' : (toBeEncrypt[i] + hashCode);
 
         (i != j) ? printf("%s%c%C", "\033[32m", toBeEncrypt[i],toBeEncrypt[j])
         : printf("%s%c","\033[32m",toBeEncrypt[i]);
     }
-    cout << "\033[0m\n\n";
+    peintf("\033[0m\n\n");
 }
+
+void decrypting(string toBeDicy) {    
+    string s1, s2;
+    cout << "\nThe message was: ";
+    int hashCode = currentTime();
+    for (size_t i = 0; i < toBeDicy.length(); ++i) {
+        (i%2==0) ? (toBeDicy[i] != '~' ? s1+= (toBeDicy[i]-hashCode) : s1+=' ') 
+        : (toBeDicy[i] != '~' ? (s2+=toBeDicy[i]+hashCode) : s2+=' ');
+    }
+    reverse(s2.begin(),s2.end());
+    printf("%s%s\n", s1.c_str(), s2.c_str());
+    printf("\033[0m\n\n");
+}
+
 
 int main() {
     printf("\nPress: 1 for Encrypting\nPress: 2 for Decrypting\nPress: 0 to exit\n\n");
@@ -51,7 +53,7 @@ int main() {
         if (test == 1) {
             system("clear");
             cin.ignore();
-            cout << "Enter your text: ";
+            printf("Enter your text: ");
             string toBeEncrypt;
             getline(cin, toBeEncrypt);
             encrypting(toBeEncrypt);
@@ -59,18 +61,14 @@ int main() {
         } else if (test == 2) {
             system("clear");
             cin.ignore();
-            cout << "Enter the encrypted message: ";
+            printf("Enter the encrypted message: ");
             string toBeDicy;
             getline(cin, toBeDicy);
             decrypting(toBeDicy);
         } else {
-            cout << "Invalid choice. Please enter a valid option.\n";
+            printf("Invalid choice. Please enter a valid option.\n");
         }
     }
 
     return 0;
 }
-#include <iostream>
-#include <ctime>
-#include <algorithm> 
-#include <string> 
