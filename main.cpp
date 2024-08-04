@@ -9,7 +9,8 @@ using namespace std;
 int currentTime() {  
     time_t t = time(NULL);
     struct tm date = *localtime(&t);
-    return date.tm_hour;
+    // return date.tm_hour;
+    return 3;
 }
 
 void encrypting(string toBeEncrypt, int hashCode = currentTime()) {
