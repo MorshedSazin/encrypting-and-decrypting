@@ -24,7 +24,7 @@ void encrypting(string toBeEncrypt, int hashCode = currentTime()) {
         (i != j) ? printf("%s%c%C", "\033[32m", toBeEncrypt[i],toBeEncrypt[j])
         : printf("%s%c","\033[32m",toBeEncrypt[i]);
     }
-    peintf("\033[0m\n\n");
+    printf("\033[0m\n\n");
 }
 
 void decrypting(string toBeDicy) {    
